@@ -77,7 +77,7 @@ class TextField extends material.StatefulWidget {
     this.canRequestFocus = true,
     this.magnifierConfiguration,
     this.hintLocales,
-    this.contextMenuBuilder
+    this.contextMenuBuilder = _defaultContextMenuBuilder
   });
   final material.TextMagnifierConfiguration? magnifierConfiguration;
   final Object groupId;
@@ -150,6 +150,17 @@ class TextField extends material.StatefulWidget {
   final material.UndoHistoryController? undoController;
   final List<material.Locale>? hintLocales;
   final material.EditableTextContextMenuBuilder? contextMenuBuilder;
+
+  // code from flutter/lib/src/material/text_field.dart
+  static material.Widget _defaultContextMenuBuilder(
+    material.BuildContext context,
+    material.EditableTextState editableTextState,
+  ) {
+    if (material.SystemContextMenu.isSupportedByField(editableTextState)) {
+      return material.SystemContextMenu.editableText(editableTextState: editableTextState);
+    }
+    return material.AdaptiveTextSelectionToolbar.editableText(editableTextState: editableTextState);
+  }
 
   @override
   material.State<TextField> createState() => TextFieldState();
