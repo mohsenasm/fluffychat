@@ -77,7 +77,7 @@ class TextField extends material.StatefulWidget {
     this.canRequestFocus = true,
     this.magnifierConfiguration,
     this.hintLocales,
-    this.contextMenuBuilder = _defaultContextMenuBuilder
+    this.contextMenuBuilder = _defaultContextMenuBuilder,
   });
   final material.TextMagnifierConfiguration? magnifierConfiguration;
   final Object groupId;
@@ -157,9 +157,13 @@ class TextField extends material.StatefulWidget {
     material.EditableTextState editableTextState,
   ) {
     if (material.SystemContextMenu.isSupportedByField(editableTextState)) {
-      return material.SystemContextMenu.editableText(editableTextState: editableTextState);
+      return material.SystemContextMenu.editableText(
+        editableTextState: editableTextState,
+      );
     }
-    return material.AdaptiveTextSelectionToolbar.editableText(editableTextState: editableTextState);
+    return material.AdaptiveTextSelectionToolbar.editableText(
+      editableTextState: editableTextState,
+    );
   }
 
   @override
@@ -194,9 +198,6 @@ class TextFieldState extends material.State<TextField> {
         widget.onChanged?.call(value);
         _updateDirection(value);
       },
-
-      // TODO: we should use default value in material.TextField when widget.contextMenuBuilder is null
-      contextMenuBuilder: widget.contextMenuBuilder,
 
       groupId: widget.groupId,
       controller: widget.controller,
@@ -263,6 +264,7 @@ class TextFieldState extends material.State<TextField> {
       canRequestFocus: widget.canRequestFocus,
       magnifierConfiguration: widget.magnifierConfiguration,
       hintLocales: widget.hintLocales,
+      contextMenuBuilder: widget.contextMenuBuilder,
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart' as material;
 import 'package:intl/intl.dart' as intl;
 
-
 extension BidiFormatter on String {
   String get bidiFormatted {
     return intl.BidiFormatter.UNKNOWN().wrapWithUnicode(this);
